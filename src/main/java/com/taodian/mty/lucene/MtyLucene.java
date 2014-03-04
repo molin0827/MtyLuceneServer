@@ -30,9 +30,15 @@ public class MtyLucene {
 	private IndexWriter iw;
 	private Directory fsDir;
 	private Analyzer analyzer;
+	private File dataRoot = null;
 	
 	public void setDirctory(String path) throws IOException{
-		fsDir = FSDirectory.open(new File(path));
+		dataRoot = new File(path).getAbsoluteFile();		
+		fsDir = FSDirectory.open(dataRoot);
+	}
+	
+	public File getDataRoot(){
+		return dataRoot;
 	}
 	
 	public void setAnalyzer(String Analyzer_name){
@@ -60,7 +66,6 @@ public class MtyLucene {
 	
 	public List<HashMap<String, String>> searchIndex(String where) throws Exception{
 		IndexSearcher isearcher = null;
-		Directory fsDir = null;
 		IndexReader ird =null;
 		List<HashMap<String, String>> data =new ArrayList<HashMap<String, String>>();
 		//常见一个地址

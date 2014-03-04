@@ -20,14 +20,17 @@ public class CreateIndexServlet extends HttpServlet {
 	throws ServletException, IOException {
 		String msg = null;
 		String indexDir =null;
+		String absPath = null;
 		if(CheckAppAuth.checkIn()){
 			String param = request.getParameter("param");
 			String shopId = request.getParameter("shop_id");
 			String appName = request.getParameter("app_name");
-			indexDir = "/data/index/" + shopId + "/" + appName;
+			indexDir = "data/index/" + shopId + "/" + appName;
 			MtyLucene ml = new MtyLucene();
 			ml.setDirctory(indexDir);
 			ml.setAnalyzer("IKAnalyzer");
+			
+			absPath = ml.getDataRoot().getAbsolutePath();
 			try {
 				boolean flag = ml.createIndex();
 				if(flag){
@@ -44,7 +47,7 @@ public class CreateIndexServlet extends HttpServlet {
 		response.setStatus(HttpServletResponse.SC_OK);
 		response.setCharacterEncoding("utf8");
 		response.setContentType("text/plain");
-		response.getWriter().print("this is MtyLuceneServer indexDir:" + indexDir + "<br>");
+		response.getWriter().print("this is MtyLuceneServer indexDir:" + absPath + "<br>");
 		response.getWriter().print("this is MtyLuceneServer CreateIndex:" + msg);
     }
 }

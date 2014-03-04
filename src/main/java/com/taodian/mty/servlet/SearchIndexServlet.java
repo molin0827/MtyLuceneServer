@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import com.taodian.mty.CheckAppAuth;
 import com.taodian.mty.lucene.MtyLucene;
@@ -23,12 +24,13 @@ public class SearchIndexServlet extends HttpServlet {
 		    protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 				String result= null;
+				String indexDir =null;
 				if(CheckAppAuth.checkIn()){
 					String searchStr = request.getParameter("search_string");
 					String shopId = request.getParameter("shop_id");
 					String appName = request.getParameter("app_name");
 					
-					String indexDir = "//data//index//" + shopId + "//" + appName;
+					indexDir = "data/index/" + shopId + "/" + appName;
 					MtyLucene ml = new MtyLucene();
 					ml.setDirctory(indexDir);
 					ml.setAnalyzer("IKAnalyzer");
