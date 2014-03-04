@@ -5,6 +5,7 @@ import org.mortbay.jetty.servlet.ServletHandler;
 
 import com.taodian.mty.servlet.CreateIndexServlet;
 import com.taodian.mty.servlet.IndexServlet;
+import com.taodian.mty.servlet.SearchIndexServlet;
 
 
 
@@ -21,6 +22,7 @@ public class LuceneApp {
         Server server = new Server(port);
         ServletHandler context = new ServletHandler();
         server.setHandler(context);
+        context.addServletWithMapping(SearchIndexServlet.class, "/search");
         context.addServletWithMapping(CreateIndexServlet.class, "/createIndex");
         context.addServletWithMapping(IndexServlet.class, "/*");
         
