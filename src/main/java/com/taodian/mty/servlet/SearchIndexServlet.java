@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 
 import com.taodian.mty.CheckAppAuth;
 import com.taodian.mty.lucene.MtyLucene;
@@ -26,7 +25,6 @@ public class SearchIndexServlet extends HttpServlet {
 			throws ServletException, IOException {
 				String result= null;
 				String indexDir =null;
-				HashMap<String, Object> data =new HashMap<String, Object>();
 				if(CheckAppAuth.checkIn()){
 					String searchStr = request.getParameter("search_string");
 					String shopId = request.getParameter("shop_id");
@@ -37,9 +35,8 @@ public class SearchIndexServlet extends HttpServlet {
 					ml.setDirctory(indexDir);
 					ml.setAnalyzer("IKAnalyzer");
 					try {
-						List<HashMap<String, String>> rs= ml.searchIndex(searchStr);
-						data.put("data", rs);
-						data.put("status", "ok");
+						List<HashMap<String, String>> data= ml.searchIndex(searchStr);
+						result = JSONArray.toJSONString(data);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -49,7 +46,6 @@ public class SearchIndexServlet extends HttpServlet {
 				response.setStatus(HttpServletResponse.SC_OK);
 				response.setCharacterEncoding("utf8");
 				response.setContentType("text/plain");
-				result = JSONObject.toJSONString(data);
 				response.getWriter().print(result);
 		    }
 }
