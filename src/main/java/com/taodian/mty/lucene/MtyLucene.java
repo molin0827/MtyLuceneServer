@@ -62,6 +62,7 @@ public class MtyLucene {
     	iw.updateDocument(term, doc);
     	iw.close();
     	
+    	System.out.print("create is =" + id);
     	return true;
     }
 	
