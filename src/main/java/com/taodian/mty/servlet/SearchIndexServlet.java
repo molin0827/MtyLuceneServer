@@ -47,6 +47,9 @@ public class SearchIndexServlet extends HttpServlet {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+				}else{
+					data.put("status", "err");
+					data.put("errmsg", "sign faild");
 				}
 				
 				response.setStatus(HttpServletResponse.SC_OK);
