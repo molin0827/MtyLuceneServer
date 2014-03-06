@@ -13,9 +13,10 @@ public class CheckAppAuth {
 		String signStr = MD5(signKey);
 		
 		if(signStr.equals(uSignKey)){
+			flag = true;
+		}else{
 			System.out.printf("  signKey=%s  ", signKey);
 			System.out.printf("  signStr=%s   uSignkey=%s", signStr, uSignKey);
-			flag = true;
 		}
 		return flag;
 	}
