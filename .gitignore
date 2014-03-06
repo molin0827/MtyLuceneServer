@@ -7,4 +7,5 @@
 
 data
 target
+target\*
 atest

@@ -70,18 +70,16 @@ public class MtyLucene {
 		IndexSearcher isearcher = null;
 		IndexReader ird =null;
 		List<HashMap<String, String>> data =new ArrayList<HashMap<String, String>>();
-		//常见一个地址
-		//fsDir = FSDirectory.open(indexdir);
-		//常见一个读取器
+		
 		ird = IndexReader.open(fsDir, true);
 		isearcher = new IndexSearcher(ird);
-		//在索引器中使用IKSimilarity相似度评估器
+
 		isearcher.setSimilarity( new IKSimilarity());
 		String[] field = {"title", "content"};
 		
 		BooleanClause.Occur[] Occures  = {BooleanClause.Occur.SHOULD, BooleanClause.Occur.SHOULD};
 		Query query = MultiFieldQueryParser.parse(Version.LUCENE_33, where, field, Occures, analyzer);
-		TopDocs td = isearcher.search(query, 20);
+		TopDocs td = isearcher.search(query, 10);
 		ScoreDoc[] sd = td.scoreDocs;
 		
 		for(ScoreDoc s:sd){

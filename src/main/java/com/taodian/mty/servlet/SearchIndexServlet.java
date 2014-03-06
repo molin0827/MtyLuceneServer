@@ -27,10 +27,13 @@ public class SearchIndexServlet extends HttpServlet {
 				String result= null;
 				String indexDir =null;
 				HashMap<String, Object> data =new HashMap<String, Object>();
-				if(CheckAppAuth.checkIn()){
+				String shopId = request.getParameter("shop_id");
+				String appName = request.getParameter("app_name");
+				String uSignKey = request.getParameter("sign_key");
+				
+				if(CheckAppAuth.checkIn(shopId, appName, uSignKey)){
 					String searchStr = request.getParameter("search_string");
-					String shopId = request.getParameter("shop_id");
-					String appName = request.getParameter("app_name");
+					
 					
 					indexDir = "data/index/" + shopId + "/" + appName;
 					MtyLucene ml = new MtyLucene();

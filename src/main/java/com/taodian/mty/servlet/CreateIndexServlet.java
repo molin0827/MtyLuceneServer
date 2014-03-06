@@ -34,12 +34,13 @@ public class CreateIndexServlet extends HttpServlet {
 		String result = null;
 		
 		HashMap<String, Object> data =new HashMap<String, Object>();
-		if(CheckAppAuth.checkIn()){
+		String shopId = request.getParameter("shop_id");
+		String appName = request.getParameter("app_name");
+		String uSignKey = request.getParameter("sign_key");
+		
+		if(CheckAppAuth.checkIn(shopId, appName, uSignKey)){
 			
 			try {
-				String shopId = request.getParameter("shop_id");
-				String appName = request.getParameter("app_name");
-				
 				indexDir = "data/index/" + shopId + "/" + appName;
 				String id = request.getParameter("id");
 				String title = request.getParameter("title");
