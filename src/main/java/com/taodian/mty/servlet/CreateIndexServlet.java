@@ -27,7 +27,7 @@ public class CreateIndexServlet extends HttpServlet {
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
-		System.out.print("this is request: createIndex");
+		System.out.print("  this is request: createIndex  ");
     	String indexDir =null;
 		String absPath = null;
 		String DEBUG = null;

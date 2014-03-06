@@ -24,7 +24,8 @@ public class SearchIndexServlet extends HttpServlet {
 		    
 		    protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-				String result= null;
+		    	System.out.print("  this is request: Search  ");
+		    	String result= null;
 				String indexDir =null;
 				HashMap<String, Object> data =new HashMap<String, Object>();
 				String shopId = request.getParameter("shop_id");
