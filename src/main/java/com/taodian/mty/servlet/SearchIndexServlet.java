@@ -34,7 +34,7 @@ public class SearchIndexServlet extends HttpServlet {
 				
 				if(CheckAppAuth.checkIn(shopId, appName, uSignKey)){
 					String searchStr = request.getParameter("search_string");
-					
+					searchStr = '"' + searchStr + '"';
 					
 					indexDir = "data/index/" + shopId + "/" + appName;
 					MtyLucene ml = new MtyLucene();
