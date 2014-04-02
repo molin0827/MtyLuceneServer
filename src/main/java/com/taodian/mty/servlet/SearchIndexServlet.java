@@ -27,6 +27,7 @@ public class SearchIndexServlet extends HttpServlet {
 		    	System.out.print("  this is request: Search  ");
 		    	String result= null;
 				String indexDir =null;
+				String finalSearchStr="";
 				HashMap<String, Object> data =new HashMap<String, Object>();
 				String shopId = request.getParameter("shop_id");
 				String appName = request.getParameter("app_name");
@@ -34,7 +35,6 @@ public class SearchIndexServlet extends HttpServlet {
 				
 				if(CheckAppAuth.checkIn(shopId, appName, uSignKey)){
 					String searchStr = request.getParameter("search_string");
-					searchStr = '"' + searchStr + '"';
 					
 					indexDir = "data/index/" + shopId + "/" + appName;
 					MtyLucene ml = new MtyLucene();

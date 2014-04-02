@@ -78,7 +78,11 @@ public class MtyLucene {
 		String[] field = {"title", "content"};
 		
 		BooleanClause.Occur[] Occures  = {BooleanClause.Occur.SHOULD, BooleanClause.Occur.SHOULD};
-		Query query = MultiFieldQueryParser.parse(Version.LUCENE_33, where, field, Occures, analyzer);
+		MultiFieldQueryParser parser = new MultiFieldQueryParser(Version.LUCENE_33, field, analyzer);
+		parser.setDefaultOperator(MultiFieldQueryParser.AND_OPERATOR );
+		
+		Query query = parser.parse(where);
+		//Query query = MultiFieldQueryParser.parse(Version.LUCENE_33, where, field, Occures, analyzer);
 		TopDocs td = isearcher.search(query, 10);
 		ScoreDoc[] sd = td.scoreDocs;
 		
